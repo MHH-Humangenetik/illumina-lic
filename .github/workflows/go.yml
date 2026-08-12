@@ -65,10 +65,10 @@ jobs:
       env:
         GOOS: linux
         GOARCH: ${{ matrix.arch }}
-      run: go build -o illumina-lic-${{ matrix.arch }} -v .
+      run: go build -o illumina-lic-${{ matrix.arch }}-${{ github.ref_name }} -v .
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: illumina-lic-${{ matrix.arch }}
-        path: illumina-lic-${{ matrix.arch }}
+        name: illumina-lic-${{ matrix.arch }}-${{ github.ref_name }}
+        path: illumina-lic-${{ matrix.arch }}-${{ github.ref_name }}
