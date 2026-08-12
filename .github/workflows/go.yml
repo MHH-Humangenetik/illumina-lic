@@ -41,7 +41,15 @@ jobs:
     needs: build
     strategy:
       matrix:
-        arch: [amd64, arm64]
+        include:
+          - os: linux
+            arch: amd64
+          - os: linux
+            arch: arm64
+          - os: darwin
+            arch: amd64
+          - os: darwin
+            arch: arm64
     steps:
     - uses: actions/checkout@v4
 
@@ -63,12 +71,12 @@ jobs:
 
     - name: Build binary
       env:
-        GOOS: linux
+        GOOS: ${{ matrix.os }}
         GOARCH: ${{ matrix.arch }}
-      run: go build -o illumina-lic-${{ matrix.arch }}-${{ github.ref_name }} -v .
+      run: go build -o illumina-lic-${{ matrix.os }}-${{ matrix.arch }}-${{ github.ref_name }} -v .
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: illumina-lic-${{ matrix.arch }}-${{ github.ref_name }}
-        path: illumina-lic-${{ matrix.arch }}-${{ github.ref_name }}
+        name: illumina-lic-${{ matrix.os }}-${{ matrix.arch }}-${{ github.ref_name }}
+        path: illumina-lic-${{ matrix.os }}-${{ matrix.arch }}-${{ github.ref_name }}
