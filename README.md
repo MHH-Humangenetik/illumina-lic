@@ -4,7 +4,7 @@ CLI to query Illumina DRAGEN license quota usage and print a table with limit, u
 
 ## Example Output
 
-```sh
+```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 | Pipeline    | Limit        | Used          | % Used | Expires                   |
 | ─────────────────────────────────────────────────────────────────────────────── |
